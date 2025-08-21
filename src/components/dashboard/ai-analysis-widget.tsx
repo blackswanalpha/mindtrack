@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
+// import { Progress } from '@/components/ui/progress';
 import { 
   Brain, 
   TrendingUp, 
@@ -52,9 +52,9 @@ export function AIAnalysisWidget({ organizationId, className }: AIAnalysisWidget
 
   useEffect(() => {
     loadStats();
-  }, [organizationId]);
+  }, [organizationId, loadStats]);
 
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
@@ -77,7 +77,7 @@ export function AIAnalysisWidget({ organizationId, className }: AIAnalysisWidget
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [organizationId]);
 
   const getRiskColor = (riskLevel: string) => {
     switch (riskLevel.toLowerCase()) {
@@ -259,7 +259,7 @@ export function AIAnalysisWidget({ organizationId, className }: AIAnalysisWidget
             </div>
             
             <div className="flex items-end gap-1 h-8">
-              {stats.dailyTrends.slice(0, 7).reverse().map((trend, index) => (
+              {stats.dailyTrends.slice(0, 7).reverse().map((trend) => (
                 <div
                   key={trend.date}
                   className="flex-1 bg-indigo-200 rounded-sm"

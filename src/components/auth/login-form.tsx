@@ -101,7 +101,7 @@ export function LoginForm() {
           </Button>
           
           <div className="text-sm text-center text-muted-foreground">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <button
               type="button"
               onClick={() => router.push('/register')}

@@ -34,13 +34,14 @@ const riskDistribution = [
   { name: 'Critical Risk', value: 2, color: '#dc2626' }
 ]
 
-const demographicData = [
-  { age: '18-25', responses: 320, completion: 89 },
-  { age: '26-35', responses: 450, completion: 92 },
-  { age: '36-45', responses: 380, completion: 87 },
-  { age: '46-55', responses: 280, completion: 85 },
-  { age: '56+', responses: 180, completion: 83 }
-]
+// Demographic data for future use
+// const demographicData = [
+//   { age: '18-25', responses: 320, completion: 89 },
+//   { age: '26-35', responses: 450, completion: 92 },
+//   { age: '36-45', responses: 380, completion: 87 },
+//   { age: '46-55', responses: 280, completion: 85 },
+//   { age: '56+', responses: 180, completion: 83 }
+// ]
 
 export function AdvancedAnalytics() {
   return (
