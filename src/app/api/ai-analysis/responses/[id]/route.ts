@@ -11,10 +11,11 @@ import { query } from '@/lib/db';
 // POST /api/ai-analysis/responses/[id] - Generate AI analysis for response
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const responseId = parseInt(params.id);
+    const { id } = await params;
+    const responseId = parseInt(id);
     
     if (isNaN(responseId)) {
       return errorResponse('Invalid response ID', 400);
@@ -110,10 +111,11 @@ export async function POST(
 // GET /api/ai-analysis/responses/[id] - Get existing AI analysis for response
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const responseId = parseInt(params.id);
+    const { id } = await params;
+    const responseId = parseInt(id);
     
     if (isNaN(responseId)) {
       return errorResponse('Invalid response ID', 400);
@@ -150,10 +152,11 @@ export async function GET(
 // DELETE /api/ai-analysis/responses/[id] - Delete AI analysis for response
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const responseId = parseInt(params.id);
+    const { id } = await params;
+    const responseId = parseInt(id);
     
     if (isNaN(responseId)) {
       return errorResponse('Invalid response ID', 400);

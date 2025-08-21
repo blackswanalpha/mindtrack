@@ -1,15 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Brain, 
-  Plus, 
-  History, 
-  BarChart3, 
+import {
+  Brain,
+  Plus,
+  History,
+  BarChart3,
   Settings,
   Sparkles
 } from 'lucide-react';
@@ -180,7 +181,7 @@ export default function AIAnalysisPage() {
                       Integration with response selection component needed
                     </p>
                     <Button variant="outline" className="mt-4" asChild>
-                      <a href="/responses">Browse Responses</a>
+                      <Link href="/responses">Browse Responses</Link>
                     </Button>
                   </div>
                 </Card>

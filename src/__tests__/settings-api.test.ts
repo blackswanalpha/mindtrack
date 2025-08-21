@@ -15,8 +15,14 @@ jest.mock('bcryptjs', () => ({
   hash: jest.fn(),
 }));
 
-const { query } = require('@/lib/db');
-const bcrypt = require('bcryptjs');
+import { query } from '@/lib/db';
+import bcrypt from 'bcryptjs';
+
+// Type definitions for test data
+interface ValidationError {
+  code: string;
+  message: string;
+}
 
 describe('Settings API Endpoints', () => {
   beforeEach(() => {
@@ -288,7 +294,7 @@ describe('Settings API Endpoints', () => {
         expect(response.status).toBe(400);
         expect(data.success).toBe(false);
         expect(data.errors).toBeDefined();
-        expect(data.errors.some((error: any) => error.code === 'PASSWORD_TOO_SHORT')).toBe(true);
+        expect(data.errors.some((error: ValidationError) => error.code === 'PASSWORD_TOO_SHORT')).toBe(true);
       });
 
       it('should reject mismatched passwords', async () => {
@@ -309,7 +315,7 @@ describe('Settings API Endpoints', () => {
         expect(response.status).toBe(400);
         expect(data.success).toBe(false);
         expect(data.errors).toBeDefined();
-        expect(data.errors.some((error: any) => error.code === 'PASSWORD_MISMATCH')).toBe(true);
+        expect(data.errors.some((error: ValidationError) => error.code === 'PASSWORD_MISMATCH')).toBe(true);
       });
     });
   });

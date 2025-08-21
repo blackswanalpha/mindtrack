@@ -15,7 +15,7 @@ const emailConfig = {
 };
 
 // Create transporter
-const transporter = nodemailer.createTransporter(emailConfig);
+const transporter = nodemailer.createTransport(emailConfig);
 
 // Email template categories
 export const EMAIL_CATEGORIES = {
