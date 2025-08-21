@@ -50,10 +50,6 @@ export function AIAnalysisWidget({ organizationId, className }: AIAnalysisWidget
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadStats();
-  }, [organizationId, loadStats]);
-
   const loadStats = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -78,6 +74,10 @@ export function AIAnalysisWidget({ organizationId, className }: AIAnalysisWidget
       setIsLoading(false);
     }
   }, [organizationId]);
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   const getRiskColor = (riskLevel: string) => {
     switch (riskLevel.toLowerCase()) {
