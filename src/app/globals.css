@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Settings-based UI customizations */
+
+/* Density settings */
+[data-density="compact"] {
+  --spacing-unit: 0.75rem;
+  --component-padding: 0.5rem;
+  --component-gap: 0.5rem;
+}
+
+[data-density="comfortable"] {
+  --spacing-unit: 1rem;
+  --component-padding: 0.75rem;
+  --component-gap: 0.75rem;
+}
+
+[data-density="spacious"] {
+  --spacing-unit: 1.25rem;
+  --component-padding: 1rem;
+  --component-gap: 1rem;
+}
+
+/* Font size settings */
+[data-font-size="small"] {
+  --font-size-base: 0.875rem;
+  --font-size-sm: 0.75rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.125rem;
+}
+
+[data-font-size="medium"] {
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+}
+
+[data-font-size="large"] {
+  --font-size-base: 1.125rem;
+  --font-size-sm: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.375rem;
+}
+
+/* High contrast mode */
+.high-contrast {
+  --color-text: #000000;
+  --color-background: #ffffff;
+  --color-border: #000000;
+  --color-primary: #0000ff;
+  --color-secondary: #666666;
+}
+
+.dark.high-contrast {
+  --color-text: #ffffff;
+  --color-background: #000000;
+  --color-border: #ffffff;
+  --color-primary: #00ffff;
+  --color-secondary: #cccccc;
+}
+
+/* Disable animations */
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Apply custom properties to components */
+.settings-aware {
+  padding: var(--component-padding);
+  gap: var(--component-gap);
+  font-size: var(--font-size-base);
+}
+
+.settings-aware-spacing {
+  margin: var(--spacing-unit);
+  padding: var(--spacing-unit);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Typography improvements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
+  }
+
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl leading-none;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl leading-tight;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl leading-tight;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl leading-snug;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl leading-snug;
+  }
+
+  h6 {
+    @apply text-base md:text-lg leading-normal;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Custom typography utilities */
+  .font-display {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+  }
+
+  .font-body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: var(--font-jetbrains-mono), Consolas, monospace;
+  }
+}
