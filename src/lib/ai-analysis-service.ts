@@ -45,10 +45,13 @@ class AIAnalysisService {
 
   constructor() {
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error('GEMINI_API_KEY environment variable is required');
+    if (!apiKey || apiKey === 'placeholder-gemini-api-key-needs-to-be-configured') {
+      console.warn('GEMINI_API_KEY not configured - AI analysis features will be disabled');
+      // Initialize with a dummy key to prevent errors during build
+      this.genAI = new GoogleGenerativeAI('dummy-key');
+    } else {
+      this.genAI = new GoogleGenerativeAI(apiKey);
     }
-    this.genAI = new GoogleGenerativeAI(apiKey);
   }
 
   /**
@@ -56,6 +59,19 @@ class AIAnalysisService {
    */
   async generateAnalysis(request: AnalysisRequest): Promise<AnalysisResult> {
     try {
+      // Check if API key is properly configured
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey || apiKey === 'placeholder-gemini-api-key-needs-to-be-configured') {
+        return {
+          analysis: 'AI analysis is currently unavailable. Please configure the GEMINI_API_KEY environment variable.',
+          recommendations: 'Contact your administrator to enable AI analysis features.',
+          riskAssessment: 'Unable to assess risk without AI analysis.',
+          sentimentScore: 0,
+          keyInsights: ['AI analysis not configured'],
+          confidenceLevel: 0
+        };
+      }
+
       const model = this.genAI.getGenerativeModel({ model: this.defaultConfig.model });
       
       // Build the analysis prompt
